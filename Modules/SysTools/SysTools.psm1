@@ -167,8 +167,7 @@ function Reset-Path {
 
     $UserPath = `
         '%ProgramFiles%\Git\bin',
-        '%ProgramFiles%\dotnet',
-        '%USERPROFILE%\.dotnet\tools' |
+        '%ProgramFiles%\dotnet' |
         Join-String -Separator ";"
 
     if(Test-ElevatedUser) {
