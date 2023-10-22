@@ -1,0 +1,77 @@
+[
+  {
+    "Keyword": "b",
+    "ShortName": "Bing",
+    "Url": "https://www.bing.com/search?q={searchTerms}"
+  },
+  {
+    "Keyword": "ms",
+    "ShortName": "MS Docs",
+    "Url": "https://learn.microsoft.com/en-us/search/?terms={searchTerms}"
+  },
+  {
+    "Keyword": "api",
+    "ShortName": ".NET API",
+    "Url": "https://learn.microsoft.com/en-us/dotnet/api/?term={searchTerms}"
+  },
+  {
+    "Keyword": "wikiru",
+    "ShortName": "Wikipedia (RU)",
+    "Url": "https://ru.wikipedia.org/w/index.php?search={searchTerms}"
+  },
+  {
+    "Keyword": "wikien",
+    "ShortName": "Wikipedia (EN)",
+    "Url": "https://en.wikipedia.org/w/index.php?search={searchTerms}"
+  },
+  {
+    "Keyword": "gh",
+    "ShortName": "GitHub",
+    "Url": "https://github.com/search?q={searchTerms}"
+  },
+  {
+    "Keyword": "ghdocs",
+    "ShortName": "GitHub Docs",
+    "Url": "https://docs.github.com/en/search?query={searchTerms}"
+  },
+  {
+    "Keyword": "dh",
+    "ShortName": "Docker Hub",
+    "Url": "https://hub.docker.com/search?q={searchTerms}"
+  },
+  {
+    "Keyword": "dhdocs",
+    "ShortName": "Docker Docs",
+    "Url": "https://docs.docker.com/search/?q={searchTerms}"
+  },
+  {
+    "Keyword": "pgsql",
+    "ShortName": "Postgres",
+    "Url": "https://www.postgresql.org/search/?q={searchTerms}"
+  },
+  {
+    "Keyword": "yt",
+    "ShortName": "Youtube",
+    "Url": "https://www.youtube.com/results?search_query={searchTerms}"
+  },
+  {
+    "Keyword": "lingru",
+    "ShortName": "Lingvo RU -> EN",
+    "Url": "https://www.lingvolive.com/en-us/translate/ru-en/{searchTerms}"
+  },
+  {
+    "Keyword": "lingen",
+    "ShortName": "Lingvo EN -> RU",
+    "Url": "https://www.lingvolive.com/en-us/translate/en-ru/{searchTerms}"
+  },
+  {
+    "Keyword": "cald",
+    "ShortName": "CALD",
+    "Url": "https://dictionary.cambridge.org/search/direct/?datasetsearch=english&q={searchTerms}"
+  },
+  {
+    "Keyword": "imdb",
+    "ShortName": "IMDB",
+    "Url": "https://www.imdb.com/find/?q={searchTerms}"
+  }
+]
