@@ -1,5 +1,3 @@
-Set-Alias dotnet "$env:ProgramFiles\dotnet\dotnet.exe"
-
 Register-ArgumentCompleter -Native -CommandName dotnet -ScriptBlock {
     param($wordToComplete, $commandAst, $cursorPosition)
     dotnet complete --position $cursorPosition "$commandAst" |

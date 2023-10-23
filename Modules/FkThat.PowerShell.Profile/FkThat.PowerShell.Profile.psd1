@@ -51,7 +51,8 @@ Description = 'Profile module.'
 # ProcessorArchitecture = ''
 
 # Modules that must be imported into the global environment prior to importing this module
-RequiredModules = 'Posh-Git', 'FkThat.PowerShell.Prompt', 'FkThat.PowerShell.ReadLine'
+RequiredModules = 'Posh-Git', 'FkThat.PowerShell.Prompt', 'FkThat.PowerShell.ReadLine',
+    'FkThat.PowerShell.DotNet'
 
 # Assemblies that must be loaded prior to importing this module
 # RequiredAssemblies = @()

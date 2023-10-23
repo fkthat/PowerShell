@@ -1,5 +1,3 @@
-$rgen = "$env:USERPROFILE\.dotnet\tools\reportgenerator.exe"
-
 <#
 .SYNOPSIS
 Generates a new code coverage HTML report.
@@ -38,7 +36,7 @@ function New-CodeCoverageReport {
 
     end {
         $r = $reports -join ";"
-        & $rgen -reports:$r -targetdir:$OutDir
+        reportgenerator -reports:$r -targetdir:$OutDir
 
         if($?) {
             $index = Join-Path $OutDir -ChildPath "index.html"
