@@ -9,16 +9,16 @@ function Start-GitFlow {
         [Parameter()]
         [string]
         # The base branch for the flow.
-        $Base = (& $git branch --show-current)
+        $Base = (git branch --show-current)
     )
 
-    & $git checkout $Base -b $Name &&
-    & $git fetch origin "${Base}:${Base}" &&
-    & $git rebase $Base &&
-    & $git push -u origin $Name
+    git checkout $Base -b $Name &&
+        git fetch origin "${Base}:${Base}" &&
+        git rebase $Base &&
+        git push -u origin $Name
 }
 
-function Clear-GitRepo {
+function Clear-GitIgnored {
     [CmdletBinding()]
     param (
         [Parameter(Position = 0, ValueFromPipeline)]
@@ -37,10 +37,10 @@ function Clear-GitRepo {
 
     process {
         $RepoDir | ForEach-Object {
-            & $git clean -df $x -e '!.vs' -e '!*.suo' -e '!.vscode/*'
+            git clean -df $x -e '!.vs' -e '!*.suo' -e '!.vscode/*'
         }
     }
 }
 
 Set-Alias saflow Start-GitFlow
-Set-Alias clgit Clear-GitRepo
+Set-Alias clgit Clear-GitIgnored
