@@ -8,30 +8,19 @@ function Get-DockerObject {
         [Parameter(Mandatory, Position = 0)]
         [ValidateSet("Container", "Image", "Volume")]
         [string]
-        $Type,
-
-        [Parameter()]
-        [string[]]
-        $Filter ="*"
+        $Type
     )
 
-    & { switch($Type) {
-        "Container" { docker ps --all --format "{{json .}}" }
-        "Image" { docker image ls --all --format "{{json .}}" }
-        "Volume" { docker volume ls --format "{{json .}}" }
-    } } |
-    ConvertFrom-Json |
-    ForEach-Object {
-        $_.PSObject.TypeNames.Insert(0, "$ns.$Type")
-    } |
-    Where-Object {
+    & {
         switch($Type) {
-            "Container" { $f = $_.Names }
-            "Image" { $f = $_.Repository }
-            "Volume" { $f = $_.Name }
+            "Container" { docker ps --all --format "{{json .}}" }
+            "Image" { docker image ls --all --format "{{json .}}" }
+            "Volume" { docker volume ls --format "{{json .}}" }
         }
-
-        $f -like $Filter
+    } |
+    ConvertFrom-Json | ForEach-Object {
+        $_.PSObject.TypeNames.Insert(0, "$ns.$Type")
+        Write-Output $_
     }
 }
 
