@@ -110,7 +110,7 @@ function Import-SearchEngine {
 function Search-Web {
 	[CmdletBinding()]
     param (
-        [Parameter(Mandatory, ParameterSetName = 'ByEngine')]
+        [Parameter(Mandatory, Position = 0, ParameterSetName = 'ByEngine')]
         [ArgumentCompleter({
             Get-SearchEngine |
                 Where-Object Keyword -like "$($args[2])*" |
