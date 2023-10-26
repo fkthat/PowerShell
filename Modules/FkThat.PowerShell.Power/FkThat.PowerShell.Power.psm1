@@ -34,3 +34,6 @@ function  Switch-PowerPlan {
         & $sudo Switch-PowerPlan $Name
     }
 }
+
+Set-Alias gpwr Get-PowerPlan
+Set-Alias swpwr Switch-PowerPlan
