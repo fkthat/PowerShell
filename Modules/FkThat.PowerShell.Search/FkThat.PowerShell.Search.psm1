@@ -110,7 +110,7 @@ function Import-SearchEngine {
 function Search-Web {
 	[CmdletBinding()]
     param (
-        [Parameter(Mandatory, Position = 0, ParameterSetName = 'ByEngine')]
+        [Parameter(Mandatory, Position = 0)]
         [ArgumentCompleter({
             Get-SearchEngine |
                 Where-Object Keyword -like "$($args[2])*" |
@@ -119,10 +119,6 @@ function Search-Web {
         [string]
         $Engine,
 
-        [Parameter(Mandatory, ParameterSetName = 'ByUrl')]
-        [string]
-        $Url,
-
         [Parameter(ValueFromRemainingArguments = $true)]
         [string[]]
         $Terms
@@ -130,17 +126,13 @@ function Search-Web {
 
     # ByEngine
     if($Engine) {
-        Get-SearchEngine |
+        $url = Get-SearchEngine |
             Where-Object Keyword -eq $Engine |
-            Select-Object -ExpandProperty Url |
-            ForEach-Object { Search-Web -Url $_ -Terms $Terms }
-    }
+            Select-Object -ExpandProperty Url -First 1
 
-    # ByUrl
-    if($Url) {
         $t = $Terms | Join-String -Separator ' '
         $t = [Uri]::EscapeDataString($t)
-        Start-Process ($Url -replace '{searchTerms}', $t)
+        Start-Process ($url -replace '{searchTerms}', $t)
     }
 }
 
