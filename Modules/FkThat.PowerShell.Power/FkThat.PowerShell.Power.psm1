@@ -1,5 +1,3 @@
-$sudo = "$env:ProgramFiles\gsudo\Current\gsudo.exe"
-
 function Get-PowerPlan {
     [CmdletBinding()]
     param (
@@ -8,31 +6,32 @@ function Get-PowerPlan {
         $Name = "*"
     )
 
-    if(Test-ElevatedUser) {
-        Get-CimInstance -classname Win32_PowerPlan -Namespace "root\cimv2\power" |
-            Where-Object ElementName -like $Name
-    }
-    else {
-        & $sudo Get-PowerPlan $Name
-    }
+    Get-CimInstance -classname Win32_PowerPlan -Namespace "root\cimv2\power" |
+        Where-Object ElementName -like $Name
 }
 
-function  Switch-PowerPlan {
+function Switch-PowerPlan {
     param (
         [Parameter(Mandatory, Position = 0)]
         [string]
         $Name
     )
 
-    if(Test-ElevatedUser) {
-        Get-CimInstance -classname Win32_PowerPlan -Namespace "root\cimv2\power" |
-            Where-Object ElementName -like "${Name}*" | Select-Object -First 1 |
-            ForEach-Object { Invoke-CimMethod -InputObject $_ -MethodName Activate } |
-            Out-Null
+    $plans = Get-PowerPlan $Name
+
+    if(($plans | Measure-Object | Select-Object -ExpandProperty Count) -gt 1) {
+        Write-Error "Ambiguous power plan pattern $Name"
+        return
     }
-    else {
-        & $sudo Switch-PowerPlan $Name
+
+    $plan = $plans | Select-Object -First 1
+
+    if(-not $plan) {
+        Write-Error "Power plan not found for pattern $Name"
+        return
     }
+
+    Invoke-CimMethod -InputObject $plan -MethodName Activate | Out-Null
 }
 
 Set-Alias gpwr Get-PowerPlan
