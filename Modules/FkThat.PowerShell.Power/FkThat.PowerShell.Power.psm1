@@ -6,7 +6,7 @@ function Get-PowerPlan {
         $Name = "*"
     )
 
-    powercfg.exe /l | Select-Object -Skip 2 | %{
+    powercfg.exe /l | Select-Object -Skip 2 | ForEach-Object {
         if($_ -match ':\s*(\S+)\s+\(([^\)]+)\)\s*(\*)?') {
             [pscustomobject]@{
                 Id = $Matches[1]
