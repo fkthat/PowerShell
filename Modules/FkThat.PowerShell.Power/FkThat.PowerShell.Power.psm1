@@ -6,32 +6,35 @@ function Get-PowerPlan {
         $Name = "*"
     )
 
-    Get-CimInstance -classname Win32_PowerPlan -Namespace "root\cimv2\power" |
-        Where-Object ElementName -like $Name
+    powercfg.exe /l | Select-Object -Skip 2 | %{
+        if($_ -match ':\s*(\S+)\s+\(([^\)]+)\)\s*(\*)?') {
+            [pscustomobject]@{
+                Id = $Matches[1]
+                Name = $Matches[2]
+                Active = -not -not $Matches[3]
+            }
+        }
+    } | Where-Object Name -like $Name
 }
+
+Class PowerPlanValidateSetGenerator: System.Management.Automation.IValidateSetValuesGenerator {
+    [string[]] GetValidValues() {
+        return (Get-PowerPlan | Select-Object -ExpandProperty Name)
+    }
+}
+
 
 function Switch-PowerPlan {
     param (
         [Parameter(Mandatory, Position = 0)]
         [string]
+        [ValidateSet([PowerPlanValidateSetGenerator])]
         $Name
     )
 
-    $plans = Get-PowerPlan $Name
-
-    if(($plans | Measure-Object | Select-Object -ExpandProperty Count) -gt 1) {
-        Write-Error "Ambiguous power plan pattern $Name"
-        return
+    Get-PowerPlan $Name | ForEach-Object {
+        powercfg.exe /s $_.Id
     }
-
-    $plan = $plans | Select-Object -First 1
-
-    if(-not $plan) {
-        Write-Error "Power plan not found for pattern $Name"
-        return
-    }
-
-    Invoke-CimMethod -InputObject $plan -MethodName Activate | Out-Null
 }
 
 Set-Alias gpwr Get-PowerPlan
