@@ -1,3 +1,5 @@
+$ErrorActionPreference = Stop
+
 function Reset-SysTray {
     Stop-Process -Name 'explorer.exe' -Force
 

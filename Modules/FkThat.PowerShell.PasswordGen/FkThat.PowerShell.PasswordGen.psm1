@@ -1,3 +1,5 @@
+$ErrorActionPreference = Stop
+
 $CharKinds = @{
     LowerCase = Join-String -InputObject ('a'..'z')
     UpperCase = Join-String -InputObject ('A'..'Z')

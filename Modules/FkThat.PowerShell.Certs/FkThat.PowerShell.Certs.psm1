@@ -1,3 +1,5 @@
+$ErrorActionPreference = Stop
+
 function New-SelfSignedCA {
     [CmdletBinding()]
     [OutputType([Microsoft.CertificateServices.Commands.Certificate])]

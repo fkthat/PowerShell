@@ -1,3 +1,5 @@
+$ErrorActionPreference = Stop
+
 $gdiff = "${env:ProgramFiles}\Git\usr\bin\diff.exe"
 
 function Compare-Content {

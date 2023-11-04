@@ -1,3 +1,5 @@
+$ErrorActionPreference = Stop
+
 Set-Alias winget "$env:LocalAppData\Microsoft\WindowsApps\winget.exe"
 
 Register-ArgumentCompleter -Native -CommandName winget -ScriptBlock {

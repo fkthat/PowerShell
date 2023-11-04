@@ -1,3 +1,5 @@
+$ErrorActionPreference = Stop
+
 $EnvRegKey = @{
     User = 'HKCU:\Environment'
     Machine = 'HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Environment'

@@ -1,3 +1,5 @@
+$ErrorActionPreference = Stop
+
 <#
 .SYNOPSIS
 Generates a new code coverage HTML report.

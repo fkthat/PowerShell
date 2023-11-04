@@ -1,3 +1,5 @@
+$ErrorActionPreference = Stop
+
 Set-Alias sudo "$env:ProgramFiles\gsudo\Current\gsudo.exe"
 
 function Start-AdminShell {

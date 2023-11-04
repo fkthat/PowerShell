@@ -1,3 +1,5 @@
+$ErrorActionPreference = Stop
+
 Set-Alias docker "$env:ProgramFiles\Docker\Docker\resources\bin\docker.exe"
 
 $ns = "FkThat.PowerShell.Docker"

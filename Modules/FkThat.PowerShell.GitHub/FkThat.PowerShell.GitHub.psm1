@@ -1,3 +1,5 @@
+$ErrorActionPreference = Stop
+
 $gh = "${env:ProgramFiles}\GitHub CLI\gh.exe"
 
 if(Test-Path $gh) {

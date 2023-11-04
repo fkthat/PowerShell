@@ -1,3 +1,5 @@
+$ErrorActionPreference = Stop
+
 function Start-GitFlow {
     [CmdletBinding()]
     param (

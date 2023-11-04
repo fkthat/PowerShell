@@ -1,3 +1,5 @@
+$ErrorActionPreference = Stop
+
 $webData = "$env:LOCALAPPDATA\Microsoft\Edge\User Data\Default\Web Data"
 $tempWebData = New-TemporaryFile
 $script:Engines = $null

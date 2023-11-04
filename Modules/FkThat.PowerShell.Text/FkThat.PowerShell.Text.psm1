@@ -1,3 +1,5 @@
+$ErrorActionPreference = Stop
+
 <#
 Updates the content of a text file according to the given scripts.
 #>

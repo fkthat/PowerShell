@@ -1,3 +1,5 @@
+$ErrorActionPreference = Stop
+
 function Prompt {
     $h = [regex]::Escape($HOME)
     $s = [regex]::Escape([System.IO.Path]::DirectorySeparatorChar)

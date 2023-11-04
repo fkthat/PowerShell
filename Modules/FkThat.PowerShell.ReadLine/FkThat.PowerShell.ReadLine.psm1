@@ -1,3 +1,5 @@
+$ErrorActionPreference = Stop
+
 Set-PSReadLineOption -EditMode vi -ViModeIndicator Script `
     -ViModeChangeHandler {
         if ($args[0] -eq 'Command') {
