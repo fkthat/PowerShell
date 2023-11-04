@@ -37,5 +37,5 @@ function Switch-PowerPlan {
     }
 }
 
-Set-Alias gpwr Get-PowerPlan
-Set-Alias swpwr Switch-PowerPlan
+Set-Alias gpwp Get-PowerPlan
+Set-Alias swpwp Switch-PowerPlan
