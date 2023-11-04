@@ -127,12 +127,13 @@ function Build-ReadmeContent {
         Write-Output "### ${module}"
 
         $cmdTypes | ForEach-Object {
-            $cmds = Get-Command -CommandType $_ -Module $module
+            $cmds = Get-Command -CommandType "$($_.Type)" -Module $module
 
             if($cmds) {
                 Write-Output ""
                 Write-Output "#### $($_.Header)"
 
+                Write-Output ""
                 $cmds | ForEach-Object {
                     Write-Output "- $($_.Name)"
                 }
