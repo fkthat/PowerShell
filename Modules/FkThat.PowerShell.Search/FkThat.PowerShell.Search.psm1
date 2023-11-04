@@ -107,15 +107,17 @@ function Import-SearchEngine {
     }
 }
 
+Class EngineValuesGenerator : System.Management.Automation.IValidateSetValuesGenerator {
+    [string[]] GetValidValues() {
+        return (Get-SearchEngine | Select-Object -ExpandProperty Keyword)
+    }
+}
+
 function Search-Web {
 	[CmdletBinding()]
     param (
         [Parameter(Mandatory, Position = 0)]
-        [ArgumentCompleter({
-            Get-SearchEngine |
-                Where-Object Keyword -like "$($args[2])*" |
-                Select-Object -ExpandProperty Keyword
-        })]
+        [ValidateSet([EngineValuesGenerator])]
         [string]
         $Engine,
 
