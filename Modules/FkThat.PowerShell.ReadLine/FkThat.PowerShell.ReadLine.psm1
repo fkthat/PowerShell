@@ -1,4 +1,4 @@
-$ErrorActionPreference = Stop
+$ErrorActionPreference = "Stop"
 
 Set-PSReadLineOption -EditMode vi -ViModeIndicator Script `
     -ViModeChangeHandler {

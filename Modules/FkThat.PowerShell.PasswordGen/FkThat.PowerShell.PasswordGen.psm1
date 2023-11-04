@@ -1,4 +1,4 @@
-$ErrorActionPreference = Stop
+$ErrorActionPreference = "Stop"
 
 $CharKinds = @{
     LowerCase = Join-String -InputObject ('a'..'z')

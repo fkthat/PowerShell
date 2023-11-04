@@ -1,4 +1,4 @@
-$ErrorActionPreference = Stop
+$ErrorActionPreference = "Stop"
 
 function Test-ElevatedUser {
     $identity = [Security.Principal.WindowsIdentity]::GetCurrent()

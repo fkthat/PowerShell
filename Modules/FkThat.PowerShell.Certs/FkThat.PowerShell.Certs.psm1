@@ -1,4 +1,4 @@
-$ErrorActionPreference = Stop
+$ErrorActionPreference = "Stop"
 
 function New-SelfSignedCA {
     [CmdletBinding()]

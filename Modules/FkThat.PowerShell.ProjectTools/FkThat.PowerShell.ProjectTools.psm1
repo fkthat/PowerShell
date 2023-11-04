@@ -1,4 +1,4 @@
-$ErrorActionPreference = 'Stop'
+$ErrorActionPreference = "Stop"
 
 $baseDir = Resolve-Path "$PSScriptRoot\.."
 $ns = "FkThat.PowerShell"

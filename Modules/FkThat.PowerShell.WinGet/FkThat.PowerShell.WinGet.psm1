@@ -1,4 +1,4 @@
-$ErrorActionPreference = Stop
+$ErrorActionPreference = "Stop"
 
 Set-Alias winget "$env:LocalAppData\Microsoft\WindowsApps\winget.exe"
 

@@ -1,4 +1,4 @@
-$ErrorActionPreference = Stop
+$ErrorActionPreference = "Stop"
 
 $gdiff = "${env:ProgramFiles}\Git\usr\bin\diff.exe"
 

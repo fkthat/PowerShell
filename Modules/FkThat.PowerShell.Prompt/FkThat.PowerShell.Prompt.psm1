@@ -1,4 +1,4 @@
-$ErrorActionPreference = Stop
+$ErrorActionPreference = "Stop"
 
 function Prompt {
     $h = [regex]::Escape($HOME)

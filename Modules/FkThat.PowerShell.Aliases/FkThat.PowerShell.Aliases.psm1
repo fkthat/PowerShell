@@ -1,4 +1,4 @@
-$ErrorActionPreference = Stop
+$ErrorActionPreference = "Stop"
 
 Set-Alias vs "$env:ProgramFiles\Microsoft Visual Studio\2022\Community\Common7\IDE\devenv.exe"
 Set-Alias code "$env:LOCALAPPDATA\Programs\Microsoft VS Code\bin\code.cmd"

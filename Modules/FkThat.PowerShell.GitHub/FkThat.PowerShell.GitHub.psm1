@@ -1,4 +1,4 @@
-$ErrorActionPreference = Stop
+$ErrorActionPreference = "Stop"
 
 $gh = "${env:ProgramFiles}\GitHub CLI\gh.exe"
 
