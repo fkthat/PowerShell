@@ -105,3 +105,38 @@ function Rename-ProjectModule {
 Set-Alias gpmo Get-ProjectModule
 Set-Alias npmo New-ProjectModule
 Set-Alias rnpmo Rename-ProjectModule
+
+function Install-Profile {
+    Set-Content $PROFILE "${baseDir};${env:PSModulePath}"
+    Add-Content $PROFILE 'Import-Module FkThat.PowerShell.Profile'
+}
+
+function Build-ReadmeContent {
+    Write-Output "# PowerShell"
+    Write-Output ""
+    Write-Output "## Modules"
+
+    $cmdTypes = `
+        @{ Type = "Function"; Header = "Functions" },
+        @{ Type = "Alias"; Header = "Aliases" }
+
+    Get-ChildItem "$PSScriptRoot\.." | ForEach-Object {
+        $module = $_.Name
+
+        Write-Output ""
+        Write-Output "### ${module}"
+
+        $cmdTypes | ForEach-Object {
+            $cmds = Get-Command -CommandType $_ -Module $module
+
+            if($cmds) {
+                Write-Output ""
+                Write-Output "#### $($_.Header)"
+
+                $cmds | ForEach-Object {
+                    Write-Output "- $($_.Name)"
+                }
+            }
+        }
+    }
+}
