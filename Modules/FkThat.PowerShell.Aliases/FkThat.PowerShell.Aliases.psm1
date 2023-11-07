@@ -8,3 +8,6 @@ Set-Alias 7z "$env:ProgramFiles\7-zip\7z.exe"
 Set-Alias ssh "$env:SystemRoot\System32\OpenSSH\ssh.exe"
 Set-Alias scp "$env:SystemRoot\System32\OpenSSH\scp.exe"
 Set-Alias less "$env:ProgramFiles\Git\usr\bin\less.exe"
+Set-Alias nvim "$env:ProgramFiles\Neovim\bin\nvim.exe"
+Set-Alias qvim "$env:ProgramFiles\Neovim\bin\nvim-qt.exe"
+
