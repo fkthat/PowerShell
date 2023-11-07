@@ -29,22 +29,12 @@ function Update-Content {
         $End = {}
     )
 
-    begin {
-        $tmp = New-TemporaryFile
-    }
-
     process {
         $Path | Get-Item | ForEach-Object {
-            Get-Content $_ |
-                ForEach-Object -Begin $Begin -Process $Process -End $End |
-                Out-File $tmp
-
-            Copy-Item $tmp $_
+            (Get-Content $_ |
+                ForEach-Object -Begin $Begin -Process $Process -End $End) |
+                Set-Content $_
         }
-    }
-
-    end {
-        Remove-Item $tmp
     }
 }
 
