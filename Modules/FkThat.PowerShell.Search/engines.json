@@ -35,12 +35,12 @@
     "Url": "https://docs.github.com/en/search?query={searchTerms}"
   },
   {
-    "Keyword": "dh",
+    "Keyword": "dockerhub",
     "ShortName": "Docker Hub",
     "Url": "https://hub.docker.com/search?q={searchTerms}"
   },
   {
-    "Keyword": "dhdocs",
+    "Keyword": "dockerdocs",
     "ShortName": "Docker Docs",
     "Url": "https://docs.docker.com/search/?q={searchTerms}"
   },
