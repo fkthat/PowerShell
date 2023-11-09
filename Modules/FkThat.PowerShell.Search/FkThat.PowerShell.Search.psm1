@@ -49,7 +49,7 @@ function Import-SearchEngine {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory, Position = 0, ParameterSetName = "ByPath")]
-        [string]
+        [string[]]
         $Path,
 
         [Parameter(Mandatory, ValueFromPipeline, ParameterSetName = "ByInput")]
@@ -61,19 +61,19 @@ function Import-SearchEngine {
     )
 
     begin {
-        $process = $true
-        $msedge = Get-Process | Where-Object Name -eq msedge
+        $msedge = Get-Process -Name msedge
 
         if($msedge) {
             if($Force) {
                 $msedge | Stop-Process
+                $continue = $true
             }
             else {
-                $process = $false
+                $continue = $false
             }
         }
 
-        if($process) {
+        if($continue) {
             $con = New-SQLiteConnection -DataSource $webData
             Invoke-SqliteQuery -Query "delete from keywords" -SQLiteConnection $con
 
@@ -82,22 +82,23 @@ function Import-SearchEngine {
                 '(@Url, @Keyword, @ShortName, "")'
 
             if($Path) {
-                $InputObject = Get-Content $Path | ConvertFrom-Json
+                $InputObject = $Path | Get-Item | ForEach-Object {
+                    Get-Content $_ | ConvertFrom-Json
+                }
             }
         }
         else {
-            Write-Warning "Close all instances of Edge or set the '-Force' flag."
+            Write-Error "Close all instances of Edge or set the '-Force' flag." `
+             -TargetObject $MyInvocation.MyCommand -ErrorAction Stop
         }
     }
 
     process {
-        if($process) {
-            $InputObject | ForEach-Object {
-                Invoke-SqliteQuery -Query $q -SQLiteConnection $con -SqlParameters @{
-                    Url = $_.Url
-                    Keyword = $_.Keyword
-                    ShortName = $_.ShortName
-                }
+        $InputObject | ForEach-Object {
+            Invoke-SqliteQuery -Query $q -SQLiteConnection $con -SqlParameters @{
+                Url = $_.Url
+                Keyword = $_.Keyword
+                ShortName = $_.ShortName
             }
         }
     }
