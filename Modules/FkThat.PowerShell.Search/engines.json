@@ -73,5 +73,10 @@
     "Keyword": "imdb",
     "ShortName": "IMDB",
     "Url": "https://www.imdb.com/find/?q={searchTerms}"
+  },
+  {
+    "Keyword": "eda",
+    "ShortName": "Eda TV",
+    "Url": "https://www.tveda.ru/search/?q={searchTerms}"
   }
 ]
