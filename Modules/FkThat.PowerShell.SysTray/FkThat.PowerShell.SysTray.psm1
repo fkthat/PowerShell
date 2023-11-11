@@ -1,13 +1,14 @@
 $ErrorActionPreference = "Stop"
 
 function Reset-SysTray {
-    Stop-Process -Name 'explorer.exe' -Force
+    Stop-Process -Name 'explorer' -Force
 
-    Remove-Item 'HKCU:\Control Panel\NotifyIconSettings' -Recurse -Force
+    Remove-Item 'HKCU:\Control Panel\NotifyIconSettings' -Recurse -Force `
+        -ErrorAction SilentlyContinue
 
     Remove-ItemProperty `
         'HKCU:\Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\TrayNotify\' `
         -Name 'IconStreams','PastIconsStream' -ErrorAction SilentlyContinue
 
-    Restart-Computer
+    Start-Process 'explorer.exe'
 }
