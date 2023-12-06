@@ -1,7 +1,6 @@
 $ErrorActionPreference = "Stop"
 
 Set-Alias vs "$env:ProgramFiles\Microsoft Visual Studio\2022\Community\Common7\IDE\devenv.exe"
-Set-Alias code "$env:LOCALAPPDATA\Programs\Microsoft VS Code\bin\code.cmd"
 Set-Alias vim "$env:ProgramFiles\Vim\vim90\vim.exe"
 Set-Alias gvim "$env:ProgramFiles\Vim\vim90\gvim.exe"
 Set-Alias 7z "$env:ProgramFiles\7-zip\7z.exe"
@@ -10,4 +9,3 @@ Set-Alias scp "$env:SystemRoot\System32\OpenSSH\scp.exe"
 Set-Alias less "$env:ProgramFiles\Git\usr\bin\less.exe"
 Set-Alias nvim "$env:ProgramFiles\Neovim\bin\nvim.exe"
 Set-Alias qvim "$env:ProgramFiles\Neovim\bin\nvim-qt.exe"
-
