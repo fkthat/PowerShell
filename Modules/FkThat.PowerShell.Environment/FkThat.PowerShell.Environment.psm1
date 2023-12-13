@@ -38,7 +38,7 @@ function Get-Env {
 }
 
 function Set-Env {
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess)]
     param (
         [Parameter(Mandatory, Position = 0)]
         [string]
@@ -60,7 +60,7 @@ function Set-Env {
 }
 
 function Remove-Env {
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess)]
     param (
         [Parameter(Mandatory, Position = 0)]
         [string[]]
@@ -76,7 +76,7 @@ function Remove-Env {
 }
 
 function Import-Env {
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess)]
     param (
         [Parameter(Mandatory, Position = 0, ParameterSetName ="ByPath")]
         [string]
@@ -84,7 +84,12 @@ function Import-Env {
 
         [Parameter(Mandatory, ValueFromPipeline, ParameterSetName = "ByInput")]
         [psobject[]]
-        $InputObject
+        $InputObject,
+
+        [Parameter()]
+        [ValidateSet('User', 'Machine')]
+        [string]
+        $Scope
     )
 
     begin {
@@ -94,9 +99,13 @@ function Import-Env {
     }
 
     process {
-        $InputObject | ForEach-Object {
-            Set-Env $_.Name $_.Value -Scope $_.Scope
-        }
+        $InputObject |
+            Where-Object {
+                (-not $Scope) -or ($_.Scope -eq $Scope)
+            } |
+            ForEach-Object {
+                Set-Env $_.Name $_.Value -Scope $_.Scope
+            }
     }
 }
 
