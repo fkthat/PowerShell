@@ -1,6 +1,6 @@
 $ErrorActionPreference = "Stop"
 
-Set-Alias vs "$env:ProgramFiles\Microsoft Visual Studio\2022\Community\Common7\IDE\devenv.exe"
+# Set-Alias vs "$env:ProgramFiles\Microsoft Visual Studio\2022\Community\Common7\IDE\devenv.exe"
 Set-Alias vim "$env:ProgramFiles\Vim\vim90\vim.exe"
 Set-Alias gvim "$env:ProgramFiles\Vim\vim90\gvim.exe"
 Set-Alias 7z "$env:ProgramFiles\7-zip\7z.exe"

@@ -1,6 +1,6 @@
 $ErrorActionPreference = "Stop"
 
-$baseDir = Resolve-Path "$PSScriptRoot\.."
+$baseDir = Get-Location # Resolve-Path "$PSScriptRoot\.."
 $ns = "FkThat.PowerShell"
 
 function Get-ProjectModule {
