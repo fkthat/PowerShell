@@ -18,19 +18,23 @@ function Get-Env {
         $Scope
     )
 
+    # get all
     $EnvRegKey.Keys | ForEach-Object {
-        $scope = $_
-        $key = Get-Item $EnvRegKey[$scope]
+        $s = $_
+        $key = Get-Item $EnvRegKey[$s]
         $key.GetValueNames() | ForEach-Object {
             [PSCustomObject]@{
-                Scope = $scope
+                Scope = $s
                 Name = $_
                 Value = $key.GetValue($_, $null, 'DoNotExpandEnvironmentNames')
             }
         }
     } |
-    Where-Object { -not $Name -or $_.Name -eq $Name } |
-        Where-Object { -not $Scope -or $_.Scope -eq $Scope }
+    # filter
+    Where-Object {
+        ((-not $Name) -or ($_.Name -like $Name)) -and
+        ((-not $Scope) -or ($_.Scope -eq $Scope))
+    }
 }
 
 function Set-Env {
