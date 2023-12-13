@@ -11,7 +11,7 @@ function Start-VSCode {
     )
 
     process {
-        $Path | ForEach-Object {
+        $Path | Get-Item | ForEach-Object {
             cmd -ArgumentList @("/c", $code, "-n", $_)
         }
     }
