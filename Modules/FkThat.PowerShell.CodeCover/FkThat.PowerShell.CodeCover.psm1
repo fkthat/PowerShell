@@ -38,11 +38,11 @@ function New-CodeCoverageReport {
 
     end {
         $r = $reports -join ";"
-        reportgenerator -reports:$r -targetdir:$OutDir
+        reportgenerator -reports:$r -targetdir:$OutDir -reporttypes:Html
 
         if($?) {
             $index = Join-Path $OutDir -ChildPath "index.html"
-            if($Open) { Start-Process $index | Out-Null }
+            if($Open) { Invoke-Item $index | Out-Null }
             Write-Output $index
         }
     }
