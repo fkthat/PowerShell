@@ -141,3 +141,9 @@ function Build-ReadmeContent {
         }
     }
 }
+
+function Deploy-Project {
+    git -C "$env:USERPROFILE\PowerShell" pull
+}
+
+Set-Alias dpp Deploy-Project
