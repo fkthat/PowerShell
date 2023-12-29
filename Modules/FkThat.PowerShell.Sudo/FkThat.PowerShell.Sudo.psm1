@@ -1,9 +1,10 @@
 $ErrorActionPreference = "Stop"
 
-Set-Alias sudo "$env:ProgramFiles\gsudo\Current\gsudo.exe"
+$sudo = "$env:ProgramFiles\gsudo\Current\gsudo.exe"
 
 function Start-AdminShell {
-    sudo pwsh -Nologo
+    & $sudo pwsh -Nologo
 }
 
 Set-Alias su Start-AdminShell
+Set-Alias sudo $sudo
