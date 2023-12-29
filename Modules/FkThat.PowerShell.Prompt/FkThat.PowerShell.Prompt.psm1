@@ -1,5 +1,12 @@
 $ErrorActionPreference = "Stop"
 
+function Test-ElevatedUser {
+    $identity = [Security.Principal.WindowsIdentity]::GetCurrent()
+    $principal = New-Object Security.Principal.WindowsPrincipal $identity
+    $elevated = $principal.IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)
+    Write-Output $elevated
+}
+
 function Prompt {
     $h = [regex]::Escape($HOME)
     $s = [regex]::Escape([System.IO.Path]::DirectorySeparatorChar)
