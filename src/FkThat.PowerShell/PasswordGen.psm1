@@ -82,3 +82,5 @@ function Get-RandomPassword {
         }
     }
 }
+
+Export-ModuleMember -Function Get-RandomPassword

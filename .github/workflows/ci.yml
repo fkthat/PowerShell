@@ -1,0 +1,21 @@
+name: CI
+
+on:
+  release:
+    types:
+      - published
+
+jobs:
+  ci:
+    name: CI
+    runs-on: ubuntu-latest
+    env:
+      REGISTRY_RW_PAT: ${{ secrets.REGISTRY_RW_PAT }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Publish
+        shell: pwsh
+        run: >-
+          Publish-PSResource src/FkThat.PowerShell
+          -NuGetApiKey $env:REGISTRY_RW_PAT -Verbose

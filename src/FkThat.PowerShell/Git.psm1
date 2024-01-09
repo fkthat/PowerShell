@@ -20,7 +20,7 @@ function Start-GitFlow {
         git push -u origin $Name
 }
 
-function Clear-GitIgnored {
+function Invoke-GitClean {
     [CmdletBinding()]
     param (
         [Parameter(Position = 0, ValueFromPipeline)]
@@ -45,4 +45,4 @@ function Clear-GitIgnored {
 }
 
 Set-Alias saflow Start-GitFlow
-Set-Alias clgit Clear-GitIgnored
+Set-Alias igitcl Invoke-GitClean
