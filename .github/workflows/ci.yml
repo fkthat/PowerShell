@@ -1,6 +1,8 @@
 name: CI
 
 on:
+  workflow_dispatch:
+
   release:
     types:
       - published
@@ -10,12 +12,19 @@ jobs:
     name: CI
     runs-on: ubuntu-latest
     env:
-      REGISTRY_RW_PAT: ${{ secrets.REGISTRY_RW_PAT }}
+      REGISTRY_RW_PAT: ${{secrets.REGISTRY_RW_PAT}}
     steps:
+      - name: Setup PowerShell
+        shell: pwsh
+        run: |
+          Set-PSRepository PSGallery -InstallationPolicy Trusted
+          Install-Module Microsoft.PowerShell.PSResourceGet
+          Register-PSResourceRepository GitHub `
+            -Uri "https://nuget.pkg.github.com/$env:GITHUB_REPOSITORY_OWNER/index.json"
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Publish
+      - name: Publish FkThat.PowerShell
         shell: pwsh
         run: >-
           Publish-PSResource src/FkThat.PowerShell
-          -NuGetApiKey $env:REGISTRY_RW_PAT -Verbose
+          -Repository GitHub -ApiKey $env:REGISTRY_RW_PAT
