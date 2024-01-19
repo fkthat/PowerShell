@@ -13,7 +13,7 @@ function Start-VS {
     [CmdletBinding()]
     param (
         [Parameter(Position = 0, ValueFromPipeline, ValueFromPipelineByPropertyName)]
-        [SupportsWildcards]
+        [SupportsWildcards()]
         [string[]]
         # The path to the folder or *.sln file. Can be a wildcard.
         $Path = "."
