@@ -10,7 +10,7 @@ function Start-VSCode {
     [CmdletBinding()]
     param (
         [Parameter(Position = 0, ValueFromPipeline, ValueFromPipelineByPropertyName)]
-        [SupportsWildcards]
+        [SupportsWildcards()]
         [string[]]
         # The path to the folder or file. Can be a wildcard.
         $Path = '.'
