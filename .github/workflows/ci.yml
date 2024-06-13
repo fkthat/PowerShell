@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  workflow_dispatch:
+
+  release:
+    types:
+      - published
+
+jobs:
+  ci:
+    name: CI
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup PowerShell
+        shell: pwsh
+        run: |
+          Register-PSResourceRepository GitHub `
+            -Uri "https://nuget.pkg.github.com/$env:GITHUB_REPOSITORY_OWNER/index.json"
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Publish
+        shell: pwsh
+        run: |
+          $cred = [pscredential]::new($env:GITHUB_REPOSITORY_OWNER, env:API_KEY)
+
+          Get-ChildItem src -Directory |
+            ForEach-Object {
+              $psd1 = Join-Path $_ "$($_.Name).psd1"
+              if(Test-Path $psd1 -PathType Leaf) {
+                @{
+                  Dir = $_.FullName
+                  Name = $_.Name
+                  Psd1 = $psd1
+                }
+              }
+            } |
+            ForEach-Object {
+              $version = Get-Content $_.Psd1 -Raw | Invoke-Expression |
+                ForEach-Object { $_.ModuleVersion }
+
+              if(-not (Find-PSResource $_.Name -Version $version -Repository GitHub `
+                  -Credential $cred -ErrorAction SilentlyContinue)) {
+                Publish-PSResource $_.Dir -Repository GitHub -Credential $cred
+              }
+            }
+        env:
+          API_KEY: ${{secrets.REGISTRY_RW_PAT}}
