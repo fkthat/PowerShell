@@ -31,6 +31,10 @@ function New-GitHubIssue {
         $Label = 'enhancement',
 
         [Parameter()]
+        [string]
+        $Project,
+
+        [Parameter()]
         [switch]
         $Editor
     )
@@ -47,6 +51,10 @@ function New-GitHubIssue {
 
     if($Repo) {
         $p += "--repo", $Repo
+    }
+
+    if($Project) {
+        $p += "--project", $Project
     }
 
     & $gh $p

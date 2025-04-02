@@ -14,4 +14,6 @@ $Global:PSDefaultParameterValues = @{
     'New-ModuleManifest:VariablesToExport' = @()
     'New-ModuleManifest:FunctionsToExport' = @()
     'New-ModuleManifest:CmdletsToExport' = @()
+    # New-GitHubIssue
+    'New-GitHubIssue:Project' = 'Pets'
 }
